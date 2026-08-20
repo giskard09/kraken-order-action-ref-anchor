@@ -1,0 +1,52 @@
+{
+  "action_ref": "3c46814c3c17d89d7e1d638f9b399752f2f3e2ac03ccf822d51b50ec446ae3fc",
+  "anchor_chain": "Base mainnet (chainId 8453)",
+  "anchor_ref_bytes32": "0x3c46814c3c17d89d7e1d638f9b399752f2f3e2ac03ccf822d51b50ec446ae3fc",
+  "anchor_registry": "0x49fEcA52bC634a9Ab773226D16619deC547794aa",
+  "envelope": {
+    "action_ref": "3c46814c3c17d89d7e1d638f9b399752f2f3e2ac03ccf822d51b50ec446ae3fc",
+    "capability": "kraken.cli.order.buy.spot_limit",
+    "generated_at_utc": "2026-08-20T23:00:00.000Z",
+    "hash_algo": "sha256",
+    "packet_version": "1.0",
+    "params_digest": "364997c9c1850f52564533d44569194aa79ef203c127baefd4424d292d4b5775",
+    "preimage": {
+      "action_type": "kraken.cli.order.buy",
+      "agent_id": "worked-example.kraken-order-action-ref-anchor",
+      "scope": "kraken:spot:private/AddOrder:asset-class:crypto_spot",
+      "timestamp": "2026-08-20T23:00:00.000Z"
+    },
+    "preimage_format": "jcs-rfc8785-v1",
+    "result_digest": "1f1e608cc0b16a19bae8fc8d28faa6cd0c111d9275e8d3fe4322f5946d8ca538"
+  },
+  "fixture_id": "kraken-order-buy-spot-limit-worked-example",
+  "jcs_payload": "{\"action_type\":\"kraken.cli.order.buy\",\"agent_id\":\"worked-example.kraken-order-action-ref-anchor\",\"scope\":\"kraken:spot:private/AddOrder:asset-class:crypto_spot\",\"timestamp\":\"2026-08-20T23:00:00.000Z\"}",
+  "params": {
+    "cl_ord_id": "worked-example-order-0001",
+    "endpoint": "POST /0/private/AddOrder",
+    "ordertype": "limit",
+    "pair": "XBTUSD",
+    "price": "50000.0",
+    "type": "buy",
+    "volume": "0.01000000"
+  },
+  "preimage": {
+    "action_type": "kraken.cli.order.buy",
+    "agent_id": "worked-example.kraken-order-action-ref-anchor",
+    "scope": "kraken:spot:private/AddOrder:asset-class:crypto_spot",
+    "timestamp": "2026-08-20T23:00:00.000Z"
+  },
+  "provenance": "Synthetic worked example. Request/result shapes modeled on krakenfx/kraken-cli's own public source (src/commands/trade.rs): the private AddOrder request fields (pair, type, ordertype, volume, price) and the venue's own AddOrder response shape (descr, txid) plus kraken-cli's own unified envelope (mode, status, order_id), both asserted verbatim in kraken-cli's own test (master_order_mirrors_the_venue_txid_and_returns_a_live_receipt). NOT captured from a running agent session, a real Kraken account, or any real order. pair/price/txid/descr are synthetic placeholders. No claim that Kraken or kraken-cli emits action_ref today, and no claim of integration, adoption, or endorsement by Kraken.",
+  "result": {
+    "descr": {
+      "order": "buy 0.01000000 XBTUSD @ limit 50000.0"
+    },
+    "mode": "live",
+    "order_id": "OTEST1-WORKEDEX-00001",
+    "status": "submitted",
+    "txid": [
+      "OTEST1-WORKEDEX-00001"
+    ]
+  },
+  "spec": "action-ref-v1 (argentum-core, docs/spec/action-ref.md)"
+}
