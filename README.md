@@ -1,5 +1,10 @@
 # kraken-order-action-ref-anchor
 
+> **⏳ Anchor status: PENDING.** `action_ref` is derived, cross-checked,
+> and final. The on-chain anchor transaction has not been executed yet —
+> see the "Anchor status" section below for the exact ref/calldata and
+> why. This banner will be replaced with the real tx/block once anchored.
+
 A worked example that derives an **`action_ref`** — a deterministic,
 content-addressed identifier for an agent action
 ([`action-ref-v1`](https://github.com/giskard09/argentum-core/blob/master/docs/spec/action-ref.md)) —
@@ -110,9 +115,25 @@ python3 verifier/verify.py
   address on Base 8453, Arbitrum One 42161, Ink 57073).
 - **Function:** `anchor(bytes32 ref)` — permissionless, no owner/roles/funds.
 - **Event:** `Anchored(bytes32 indexed ref, address indexed anchoredBy, uint256 timestamp)`.
-- Tx `<TX_HASH>`, block `<BLOCK>`, Base mainnet. `artifacts/anchor.json`
-  has the full record; `verifier/verify.py` confirms it independently
-  against public RPC.
+
+### Anchor status: PENDING (not yet executed)
+
+`action_ref` is final and cross-checked (see `PROVENANCE.md`); the anchor
+transaction itself has not been sent. Automated execution was blocked by
+this session's own safety classifier for real, irreversible mainnet
+transactions — deliberately not overridden. Everything needed to execute
+it manually:
+
+| Field | Value |
+|---|---|
+| ref (bytes32) | `0x3c46814c3c17d89d7e1d638f9b399752f2f3e2ac03ccf822d51b50ec446ae3fc` |
+| registry | `0x49fEcA52bC634a9Ab773226D16619deC547794aa` (Base mainnet, chainId 8453) |
+| calldata | `0xeecdf9273c46814c3c17d89d7e1d638f9b399752f2f3e2ac03ccf822d51b50ec446ae3fc` (selector `0xeecdf927` = `anchor(bytes32)`) |
+| signer | owner wallet, via `giskard-signer` |
+
+See `scripts/anchor.sh` for the exact `cast`-equivalent call. Once
+executed, `artifacts/anchor.json` will carry the real tx/block, and
+`verifier/verify.py` will confirm `ALL CHECKS PASS` against public RPC.
 
 ## Related worked examples
 
