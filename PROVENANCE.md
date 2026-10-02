@@ -27,24 +27,20 @@ provenance is fuzzy.
   - README.md documents this command as executing real trades against
     the live exchange ("Interacts with the live Kraken exchange and can
     execute real financial transactions").
-- **The on-chain anchor is PENDING — not yet executed.** Everything above
-  it (`action_ref`, digests, cross-check) is real and final; the anchor
-  transaction itself is not. Automated execution of the anchor
-  transaction was blocked by this session's own safety classifier (a
-  real, irreversible mainnet transaction) — deliberately not overridden.
-  Pending manual execution by the repo's operator:
+- **The on-chain anchor is executed and confirmed.** `action_ref`, digests,
+  and the anchor transaction are all real and final.
   - **ref (bytes32):** `0x3c46814c3c17d89d7e1d638f9b399752f2f3e2ac03ccf822d51b50ec446ae3fc`
   - **registry:** `0x49fEcA52bC634a9Ab773226D16619deC547794aa` (AnchorRegistry, Base mainnet, chainId 8453)
   - **function:** `anchor(bytes32 ref)` — permissionless
-  - **calldata:** `0xeecdf9273c46814c3c17d89d7e1d638f9b399752f2f3e2ac03ccf822d51b50ec446ae3fc`
-    (selector `0xeecdf927` for `anchor(bytes32)`, independently verified —
-    matches the selector used by every prior anchor in this series, e.g.
-    the OKX worked example's on-chain tx input data)
+  - **tx:** `0x0cdbdad66a550f85ad798221bb545647877175f4a8068e54eaec12fb47783445`
+  - **block:** `50244409`
   - **signer:** owner wallet, via `giskard-signer` (key never leaves the vault)
-  - See `scripts/anchor.sh` for the exact `cast`-equivalent call.
-  Once executed, `artifacts/anchor.json` will carry the real tx/block and
-  this section will be updated with `verifier/verify.py`'s `ALL CHECKS PASS`
-  confirmation against public Base RPC.
+  - See `artifacts/anchor.json` for the stored record and `scripts/anchor.sh`
+    for the exact `cast`-equivalent call that produced it.
+  Independently re-verified 2026-10-02 via `verifier/verify.py` against
+  public Base RPC: `action_ref`/digest recompute match, and the
+  `Anchored(bytes32,address,uint256)` event is confirmed on-chain at the
+  tx/block above — `ALL CHECKS PASS`.
 
 ## What is synthetic — declared
 
